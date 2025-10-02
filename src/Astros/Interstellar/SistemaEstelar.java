@@ -14,27 +14,31 @@ public class SistemaEstelar {
     public SistemaEstelar(String nome, Estrela estrela) {
         this.nome = nome;
         this.estrela = estrela;
+        estrela.setMeuSistema(this);
         this.planetas = new ArrayList<>();
     }
 
-    public void adicionarPlaneta(Planeta planeta) {
+    public void adicionarPlanetaNoSistema(Planeta planeta) {
         planetas.add(planeta);
+    }
+    public String getNome(){
+        return nome;
     }
 
     public Estrela getEstrela() {
         return estrela;
     }
 
-    public List<Planeta> getPlanetas() {
-        return planetas;
-    }
-
     public void exibirSistema() {
         System.out.println("==== Sistema: " + this.nome + " ====");
         System.out.println("Estrela: " + this.estrela.getNome());
-        System.out.println("----- Planetas -----");
-        for (Planeta p : planetas) {
-            System.out.println(p.getNome()); // exibe o nome de cada planeta
+        if (this.getEstrela().getPlanetas() == null) {
+            System.out.println("Não possui planetas!");
+        } else {
+            System.out.println("----- Planetas -----");
+            for (Planeta p : this.getEstrela().getPlanetas()) {
+                System.out.println(p.getNome()); // exibe o nome de cada planeta
+            }
         }
         System.out.println("========================================");
     }
@@ -42,9 +46,13 @@ public class SistemaEstelar {
     public void exibirSistemaComDados() {
         System.out.println("==== Sistema: " + this.nome + " ====");
         System.out.println("Estrela: " + this.estrela.getNome());
-        System.out.println("----- Planetas -----");
-        for (Planeta p : planetas) {
-            p.dados(); // exibe o nome de cada planeta
+        if (this.getEstrela().getPlanetas().isEmpty()) {
+            System.out.println("Não possui planetas!");
+        } else {
+            System.out.println("----- Planetas -----");
+            for (Planeta p : this.getEstrela().getPlanetas()) {
+                p.dados(); // exibe os dados de cada planeta
+            }
         }
         System.out.println("========================================");
     }

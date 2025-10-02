@@ -1,21 +1,16 @@
 import Astros.Estrela;
 import Astros.Planeta;
-import Astros.Interstellar.SistemaSolar;
 import Astros.Interstellar.SistemaEstelar;
 
 public class Main {
     public static void main(String[] args) {
 
-        // // Sistema fictício criado pelo usuário
-        // Estrela sol = new Estrela("Sol", 1392680, 1989e27, 10000, 38800, 6);
-        // Planeta terra = new Planeta("Terra", 12742, 5970, "Rochoso", 1, sol);
-        // SolarSystem sisteminha = new SolarSystem("Sisteminha", sol);
-        // // Adcionando Terra como planeta do seu Sistema 
-        // sisteminha.adicionarPlaneta(terra);
+        Estrela bublle = new Estrela("Bublle", 25000000, 1500000, 40000, 1299);
+        Planeta ceu = new Planeta("Céu", 1500000, 200000, "Rochoso", bublle);
+        Planeta fumala = new Planeta("Fumala", 3000000, 500000, "Gasoso", bublle);
 
-        // Sistema único e real
-        SistemaSolar sistemaSolar = new SistemaSolar("Sistema Solar");
-        sistemaSolar.exibirSistemaComDados();
+        SistemaEstelar nullo = new SistemaEstelar("Nullo", bublle);
 
+        nullo.exibirSistemaComDados();
     }
 }

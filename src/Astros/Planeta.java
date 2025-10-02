@@ -1,6 +1,8 @@
 package Astros;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Planeta implements Astros {
     private String nome; // Terra, Marte...
@@ -10,21 +12,21 @@ public class Planeta implements Astros {
     private String tipoDePlaneta; // Rochoso, Gasoso, Gelo, oceânico...
     private boolean temLuaEmOrbita; // Possui uma lua em sua orbita?
     private int quantidadeDeLuasEmOrbita = 0;
-    private Lua[] luas;
+    private List<Lua> luas;
     private double distanciaDaEstrela; // Em Km
     private Estrela estrela;
 
     DecimalFormat formatoDeNumeros = new DecimalFormat("#,###.##");
     DecimalFormat formatoDeNumerosCientifico = new DecimalFormat("#,###.E0");
 
-    public Planeta(String nome, double tamanho, double massa, String tipoDePlaneta, int maxLuas, Estrela estrela) {
+    public Planeta(String nome, double tamanho, double massa, String tipoDePlaneta, Estrela estrela) {
         this.setNome(nome);
         this.setTamanho(tamanho);
         this.setMassa(massa);
         this.setTipoDePlaneta(tipoDePlaneta);
-        this.luas = new Lua[maxLuas];
         this.setEstrela(estrela);
-        estrela.adicionarPlaneta(this);
+        estrela.adicionarPlanetaNaEstrela(this);
+        this.luas = new ArrayList<>();
     }
 
     public Estrela getEstrela() {
@@ -103,12 +105,16 @@ public class Planeta implements Astros {
     }
 
     public void adicionarLua(Lua lua) {
-        if (this.getQuantidadeDeLuasEmOrbita() < luas.length) {
-            luas[this.getQuantidadeDeLuasEmOrbita()] = lua;
-            this.setQuantidadeDeLuasEmOrbita(this.getQuantidadeDeLuasEmOrbita() + 1);
-        } else {
-            System.out.println("Planeta excedeu o limite possível de orbita.");
-        }
+        luas.add(lua);
+        this.setQuantidadeDeLuasEmOrbita(this.getQuantidadeDeLuasEmOrbita() + 1);
+    }
+
+    public List<Lua> getLuas() {
+        return luas;
+    }
+
+    public void setLuas(List<Lua> luas) {
+        this.luas = luas;
     }
 
     @Override
@@ -120,11 +126,11 @@ public class Planeta implements Astros {
         if (this.isTemLuaEmOrbita()) {
             if (this.getQuantidadeDeLuasEmOrbita() == 1) {
                 System.out.println(
-                        "O planeta possui uma lua chamada: " + luas[0].getNome() + ", em orbita.");
+                        "O planeta possui uma lua chamada: " + luas.get(0).getNome() + ", em orbita.");
             } else {
                 System.out.println("O planeta possui " + this.getQuantidadeDeLuasEmOrbita() + " luas em orbita.");
                 for (int i = 0; i < this.getQuantidadeDeLuasEmOrbita(); i++) {
-                    System.out.println((i + 1) + "-Lua: " + luas[i].getNome());
+                    System.out.println((i + 1) + "-Lua: " + luas.get(i).getNome());
                 }
             }
         } else {
