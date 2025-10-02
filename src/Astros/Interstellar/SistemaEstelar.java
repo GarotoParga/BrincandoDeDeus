@@ -6,12 +6,12 @@ import java.util.List;
 import Astros.Estrela;
 import Astros.Planeta;
 
-public class SolarSystem {
+public class SistemaEstelar {
     private String nome;
     private Estrela estrela;
     private List<Planeta> planetas;
 
-    public SolarSystem(String nome, Estrela estrela) {
+    public SistemaEstelar(String nome, Estrela estrela) {
         this.nome = nome;
         this.estrela = estrela;
         this.planetas = new ArrayList<>();
