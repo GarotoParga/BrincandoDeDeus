@@ -1,5 +1,7 @@
 package Astros;
 
+import java.text.DecimalFormat;
+
 public class Lua implements Astros {
     private String nome;
     private double raio;
@@ -9,13 +11,15 @@ public class Lua implements Astros {
     private double distanciaDoPlaneta;
     private Planeta planeta;
 
+    DecimalFormat formatoDeNumeros = new DecimalFormat("#,###.##");
+    DecimalFormat formatoDeNumerosCientifico = new DecimalFormat("#,###.E0");
+
     public Lua(String nome, double tamamho, double massa, Planeta planeta) {
         this.setNome(nome);
         this.setTamanho(tamamho);
         this.setMassa(massa);
         this.setPlaneta(planeta);
-        planeta.adcionarLua(this);
-        System.out.println("Lua criada!");
+        planeta.adicionarLua(this);
     }
 
     public String getNome() {
@@ -78,8 +82,8 @@ public class Lua implements Astros {
     public void dados() {
         System.out.println("----------DETALHES DA LUA----------");
         System.out.println("Nome da lua: " + this.getNome());
-        System.out.println("Tamanho da lua: " + this.getTamanho() + " Km.");
-        System.out.println("Massa da lua: " + this.getMassa() + " Kg.");
+        System.out.println("Tamanho da lua: " + formatoDeNumeros.format(this.getTamanho()) + " Km.");
+        System.out.println("Massa da lua: " + formatoDeNumerosCientifico.format(this.getMassa()) + " Kg.");
         System.out.println("Orbitando planeta: " + this.getPlaneta().getNome());
         System.out.println("----------------------------------------");
     }

@@ -1,5 +1,7 @@
 package Astros;
 
+import java.text.DecimalFormat;
+
 public class Planeta implements Astros {
     private String nome; // Terra, Marte...
     private double raio; // Em Km
@@ -12,6 +14,9 @@ public class Planeta implements Astros {
     private double distanciaDaEstrela; // Em Km
     private Estrela estrela;
 
+    DecimalFormat formatoDeNumeros = new DecimalFormat("#,###.##");
+    DecimalFormat formatoDeNumerosCientifico = new DecimalFormat("#,###.E0");
+
     public Planeta(String nome, double tamanho, double massa, String tipoDePlaneta, int maxLuas, Estrela estrela) {
         this.setNome(nome);
         this.setTamanho(tamanho);
@@ -19,8 +24,7 @@ public class Planeta implements Astros {
         this.setTipoDePlaneta(tipoDePlaneta);
         this.luas = new Lua[maxLuas];
         this.setEstrela(estrela);
-        estrela.adcionarPlaneta(this);
-        System.out.println("Planeta criado!");
+        estrela.adicionarPlaneta(this);
     }
 
     public Estrela getEstrela() {
@@ -98,7 +102,7 @@ public class Planeta implements Astros {
         this.distanciaDaEstrela = distanciaDaEstrela;
     }
 
-    public void adcionarLua(Lua lua) {
+    public void adicionarLua(Lua lua) {
         if (this.getQuantidadeDeLuasEmOrbita() < luas.length) {
             luas[this.getQuantidadeDeLuasEmOrbita()] = lua;
             this.setQuantidadeDeLuasEmOrbita(this.getQuantidadeDeLuasEmOrbita() + 1);
@@ -109,17 +113,16 @@ public class Planeta implements Astros {
 
     @Override
     public void dados() {
-        System.out.println("----------DETALHES DO PLANETA----------");
-        System.out.println("Nome do Planeta: " + this.getNome());
-        System.out.println("Tamanho do planeta: " + this.getTamanho() + " Km.");
-        System.out.println("Massa do planeta: " + this.getMassa() + " Kg.");
+        System.out.println("==========Planeta " + this.getNome() + "==========");
+        System.out.println("Tamanho do planeta: " + formatoDeNumeros.format(this.getTamanho()) + " Km.");
+        System.out.println("Massa do planeta: " + formatoDeNumerosCientifico.format(this.getMassa()) + " Kg.");
         System.out.println("Planeta do tipo: " + this.getTipoDePlaneta());
         if (this.isTemLuaEmOrbita()) {
             if (this.getQuantidadeDeLuasEmOrbita() == 1) {
                 System.out.println(
                         "O planeta possui uma lua chamada: " + luas[0].getNome() + ", em orbita.");
             } else {
-                System.out.println("O planeta possui " + this.getQuantidadeDeLuasEmOrbita() + " luas em orbitas.");
+                System.out.println("O planeta possui " + this.getQuantidadeDeLuasEmOrbita() + " luas em orbita.");
                 for (int i = 0; i < this.getQuantidadeDeLuasEmOrbita(); i++) {
                     System.out.println((i + 1) + "-Lua: " + luas[i].getNome());
                 }
