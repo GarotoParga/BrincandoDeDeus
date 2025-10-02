@@ -1,19 +1,22 @@
 package Astros;
 
-public class Lua implements Astros{
+public class Lua implements Astros {
     private String nome;
     private double raio;
+    private double tamanho;
     private double massa;
     private Planeta orbitandoPlaneta;
     private double distanciaDoPlaneta;
+    private Planeta planeta;
 
-
-    public Lua(String nome, double raio, double massa){
+    public Lua(String nome, double tamamho, double massa, Planeta planeta) {
         this.setNome(nome);
-        this.setRaio(raio);
+        this.setTamanho(tamamho);
         this.setMassa(massa);
+        this.setPlaneta(planeta);
+        planeta.adcionarLua(this);
+        System.out.println("Lua criada!");
     }
-
 
     public String getNome() {
         return nome;
@@ -21,6 +24,14 @@ public class Lua implements Astros{
 
     public double getRaio() {
         return raio;
+    }
+
+    public double getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(double tamanho) {
+        this.tamanho = tamanho;
     }
 
     public double getMassa() {
@@ -55,17 +66,24 @@ public class Lua implements Astros{
         this.distanciaDoPlaneta = distanciaDoPlaneta;
     }
 
+    public Planeta getPlaneta() {
+        return planeta;
+    }
+
+    public void setPlaneta(Planeta planeta) {
+        this.planeta = planeta;
+    }
 
     @Override
     public void dados() {
+        System.out.println("----------DETALHES DA LUA----------");
         System.out.println("Nome da lua: " + this.getNome());
-        System.out.println("Raio da lua: " + this.getRaio());
-        System.out.println("Massa da lua: " + this.getMassa());
-        System.out.println("Orbitando planeta: " + this.getOrbitandoPlaneta().getNome());
+        System.out.println("Tamanho da lua: " + this.getTamanho() + " Km.");
+        System.out.println("Massa da lua: " + this.getMassa() + " Kg.");
+        System.out.println("Orbitando planeta: " + this.getPlaneta().getNome());
+        System.out.println("----------------------------------------");
     }
 
-
-    @Override
     public void compararTamanho(Planeta planeta) {
     }
 

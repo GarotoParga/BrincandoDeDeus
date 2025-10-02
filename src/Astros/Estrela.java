@@ -1,24 +1,36 @@
 package Astros;
 
-public class Estrela {
+public class Estrela implements Astros {
     private String nome; // Sol...
     private double raio; // Em Km
+    private double tamanho;
     private double massa; // Em Kg
     private double luminosidade; // Em Watts
     private double temperaturaDaSuperficie; // Em Kelvin
-    private int quantidadeDePlanetasEmOrbita; // Quantos planetas orbitam essa estrela
+    private int quantidadeDePlanetasEmOrbita = 0;// Quantos planetas orbitam essa estrela
     private Planeta[] planetas;
 
-    public Estrela(String nome, double raio, double massa, double luminosidade, double temperaturaDaSuperficie) {
+    public Estrela(String nome, double tamanho, double massa, double luminosidade, double temperaturaDaSuperficie,
+            int maxPlanetas) {
         this.setNome(nome);
-        this.setRaio(raio);
+        this.setTamanho(tamanho);
         this.setMassa(massa);
         this.setLuminosidade(luminosidade);
         this.setTemperaturaDaSuperficie(temperaturaDaSuperficie);
+        this.planetas = new Planeta[maxPlanetas];
+        System.out.println("Estrela criada!");
     }
 
     public String getNome() {
         return nome;
+    }
+
+    public double getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(double tamanho) {
+        this.tamanho = tamanho;
     }
 
     public double getRaio() {
@@ -71,6 +83,38 @@ public class Estrela {
 
     public void setPlanetas(int i, Planeta planeta) {
         this.planetas[i] = planeta;
+    }
+
+    public void adcionarPlaneta(Planeta planeta) {
+        if (this.getQuantidadeDePlanetasEmOrbita() < planetas.length) {
+            this.planetas[this.getQuantidadeDePlanetasEmOrbita()] = planeta;
+            this.setQuantidadeDePlanetasEmOrbita(this.getQuantidadeDePlanetasEmOrbita() + 1);
+        }
+    }
+
+    @Override
+    public void dados() {
+        System.out.println("----------DETALHES DA ESTRELA----------");
+        System.out.println("Nome da estrela: " + this.getNome());
+        System.out.println("Tamanho da estrela: " + this.getTamanho() + " Km.");
+        System.out.println("Massa da estrela: " + this.getMassa() + " Kg.");
+        System.out.println("Estrela com luminosidade de " + this.getLuminosidade() + " Watts.");
+        System.out.println("Estrela com temperatura de " + this.getTemperaturaDaSuperficie() + " K.");
+        if (this.getQuantidadeDePlanetasEmOrbita() == 1) {
+            System.out.println(
+                    "A estrela possui um planeta chamado: " + planetas[0].getNome() + ", em orbita.");
+        } else if (this.getQuantidadeDePlanetasEmOrbita() > 1) {
+            System.out.println("A estrela possui " + this.getQuantidadeDePlanetasEmOrbita() + " planetas em orbitas.");
+            for (int i = 0; i < this.getQuantidadeDePlanetasEmOrbita(); i++) {
+                System.out.println((i + 1) + "-Planeta: " + planetas[i].getNome());
+            }
+        } else {
+            System.out.println("A estrela " + this.getNome() + " não possui um planeta em orbita.");
+        }
+        System.out.println("----------------------------------------");
+    }
+
+    public void compararTamanho(Planeta planeta) {
     }
 
 }
