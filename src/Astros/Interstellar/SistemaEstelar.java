@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Astros.Estrela;
+import Astros.Galaxia;
 import Astros.Planeta;
 
 public class SistemaEstelar {
     private String nome;
     private Estrela estrela;
     private List<Planeta> planetas;
+    private Galaxia galaxia;
 
     public SistemaEstelar(String nome, Estrela estrela) {
         this.nome = nome;
@@ -21,12 +23,21 @@ public class SistemaEstelar {
     public void adicionarPlanetaNoSistema(Planeta planeta) {
         planetas.add(planeta);
     }
-    public String getNome(){
+
+    public String getNome() {
         return nome;
     }
 
     public Estrela getEstrela() {
         return estrela;
+    }
+
+    public Galaxia getMinhaGalaxia() {
+        return galaxia;
+    }
+
+    public void setMeuSistema(Galaxia galaxia) {
+        this.galaxia = galaxia;
     }
 
     public void exibirSistema() {
