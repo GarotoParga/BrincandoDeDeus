@@ -10,17 +10,35 @@ public class Galaxia {
     private Estrela estrela;
     private Planeta planeta;
     private Lua lua;
-    private SistemaEstelar sistemaestelar;
+    private SistemaEstelar sistemaEstelarObjEstelar;
     private List<SistemaEstelar> sistemaEstelar;
 
     // Construtor
     public Galaxia(String nome, SistemaEstelar sistemaEstelar) {
+        this.sistemaEstelarObjEstelar = sistemaEstelar;
         this.setSistemaEstelar(new ArrayList<>());
-        this.sistemaestelar.setMeuSistema(this);
+        if (sistemaEstelar.getMinhaGalaxia() == null) {
+            this.getSistemaEstelar().add(sistemaEstelar);
+            sistemaEstelar.setMeuSistema(this);
+        } else {
+            System.out.println("Impossível vincular Galaxia " + this.nome + " no Sistema "
+                    + this.sistemaEstelarObjEstelar.getNome() + ".");
+            System.out.println("Sistema " + this.sistemaEstelarObjEstelar.getNome() + " está vinculada a Galaxia "
+                    + this.sistemaEstelarObjEstelar.getMinhaGalaxia().getNome() + ".");
+        }
     }
 
     public void adicionarSistema(SistemaEstelar sistemaEstelar) {
-        this.getSistemaEstelar().add(sistemaEstelar);
+        if (sistemaEstelar.getMinhaGalaxia() == null) {
+            this.getSistemaEstelar().add(sistemaEstelar);
+            sistemaEstelar.setMeuSistema(this);
+        } else {
+            System.out.println("Impossível vincular Galaxia " + this.nome + " no Sistema "
+                    + this.sistemaEstelarObjEstelar.getNome() + ".");
+            System.out.println("Sistema " + this.sistemaEstelarObjEstelar.getNome() + " está vinculada a Galaxia "
+                    + this.sistemaEstelarObjEstelar.getMinhaGalaxia().getNome() + ".");
+        }
+
     }
 
     public void mostrarDadosSimples() {

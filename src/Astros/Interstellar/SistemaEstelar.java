@@ -16,8 +16,8 @@ public class SistemaEstelar {
     public SistemaEstelar(String nome, Estrela estrela) {
         this.nome = nome;
         this.estrela = estrela;
-        estrela.setMeuSistema(this);
         this.planetas = new ArrayList<>();
+        estrela.setMeuSistema(this);
     }
 
     public void adicionarPlanetaNoSistema(Planeta planeta) {
@@ -37,7 +37,14 @@ public class SistemaEstelar {
     }
 
     public void setMeuSistema(Galaxia galaxia) {
-        this.galaxia = galaxia;
+        if (this.getMinhaGalaxia() == null) {
+            this.galaxia = galaxia;
+        } else {
+            System.out.println("Impossível vincular Galaxia " + this.nome + " no Sistema "
+                    + this.getNome() + ".");
+            System.out.println("Sistema " + this.getNome() + " está vinculada a Galaxia "
+                    + this.getMinhaGalaxia().getNome() + ".");
+        }
     }
 
     public void exibirSistema() {

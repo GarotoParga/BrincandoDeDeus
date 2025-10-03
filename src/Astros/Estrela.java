@@ -103,7 +103,14 @@ public class Estrela implements Astros {
     }
 
     public void setMeuSistema(SistemaEstelar sistemaEstelar) {
-        this.sistemaEstelar = sistemaEstelar;
+        if (this.getMeuSistema() == null) {
+            this.sistemaEstelar = sistemaEstelar;
+        } else {
+            System.out.println("Impossível vincular Sistema " + sistemaEstelar.getNome() + " na Estrela "
+                    + this.getNome() + ".");
+            System.out.println("Estrela " + this.getNome() + " está vinculada ao Sistema "
+                    + this.getMeuSistema().getNome() + ".");
+        }
     }
 
     @Override
