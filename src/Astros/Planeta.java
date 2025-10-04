@@ -25,6 +25,7 @@ public class Planeta implements Astros {
         this.setMassa(massa);
         this.setTipoDePlaneta(tipoDePlaneta);
         this.setEstrela(estrela);
+        this.setTemLuaEmOrbita(false);
         estrela.adicionarPlanetaNaEstrela(this);
         this.luas = new ArrayList<>();
     }
@@ -107,6 +108,7 @@ public class Planeta implements Astros {
     public void adicionarLua(Lua lua) {
         luas.add(lua);
         this.setQuantidadeDeLuasEmOrbita(this.getQuantidadeDeLuasEmOrbita() + 1);
+        this.setTemLuaEmOrbita(true);
     }
 
     public List<Lua> getLuas() {

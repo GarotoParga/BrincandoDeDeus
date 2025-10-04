@@ -88,7 +88,6 @@ public class Lua implements Astros {
         System.out.println("----------------------------------------");
     }
 
-    public void compararTamanho(Planeta planeta) {
-    }
+
 
 }
