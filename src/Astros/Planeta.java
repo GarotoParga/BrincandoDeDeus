@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Planeta implements Astros {
     private String nome; // Terra, Marte...
+    private int idade;
     private double raio; // Em Km
     private double tamanho; // Em Km
     private double massa; // Em Kg

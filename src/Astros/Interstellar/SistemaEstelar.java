@@ -9,11 +9,12 @@ import Astros.Lua;
 import Astros.Planeta;
 
 public class SistemaEstelar {
-    private String nome;
-    private Estrela estrela;
+    private final String nome;
+    private int idade;
+    private final Estrela estrela;
     private Lua lua;
-    private List<Planeta> planetas;
-    private List<Estrela> estrelas;
+    private final List<Planeta> planetas;
+    private final List<Estrela> estrelas;
     private Galaxia galaxia;
 
     public SistemaEstelar(String nome, Estrela estrela) {
@@ -32,9 +33,7 @@ public class SistemaEstelar {
     public void adicionarEstrelaNoSistema(Estrela estrela) {
         estrelas.add(estrela);
         if (estrela.getPlanetas() != null) {
-            for (Planeta planeta : estrela.getPlanetas()) {
-                planetas.add(planeta);
-            }
+            planetas.addAll(estrela.getPlanetas());
         }
     }
 

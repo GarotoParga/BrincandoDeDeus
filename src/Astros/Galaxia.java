@@ -7,6 +7,7 @@ import Astros.Interstellar.SistemaEstelar;
 
 public class Galaxia {
     private String nome;
+    private int idade;
     private Estrela estrela;
     private Planeta planeta;
     private Lua lua;

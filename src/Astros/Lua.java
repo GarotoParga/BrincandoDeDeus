@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 
 public class Lua implements Astros {
     private String nome;
+    private int idade;
     private double raio;
     private double tamanho;
     private double massa;

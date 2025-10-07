@@ -8,6 +8,7 @@ import Astros.Interstellar.SistemaEstelar;
 
 public class Estrela implements Astros {
     private String nome; // Sol...
+    private int idade;
     private double raio; // Em Km
     private double tamanho;
     private double massa; // Em Kg
