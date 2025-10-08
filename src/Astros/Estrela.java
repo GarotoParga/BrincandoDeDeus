@@ -6,56 +6,30 @@ import java.util.List;
 
 import Astros.Interstellar.SistemaEstelar;
 
-public class Estrela implements Astros {
-    private String nome; // Sol...
-    private int idade;
-    private double raio; // Em Km
-    private double tamanho;
-    private double massa; // Em Kg
-    private double luminosidade; // Em Watts
-    private double temperaturaDaSuperficie; // Em Kelvin
-    private int quantidadeDePlanetasEmOrbita = 0;// Quantos planetas orbitam essa estrela
+public class Estrela extends Astro {
+    private int quantidadeDePlanetasEmOrbita; 
     private List<Planeta> planetas;
     private SistemaEstelar sistemaEstelar;
 
     DecimalFormat formatoDeNumeros = new DecimalFormat("#,###.##");
     DecimalFormat formatoDeNumerosCientifico = new DecimalFormat("#,###.E0");
 
-    public Estrela(String nome, double tamanho, double massa, double luminosidade, double temperaturaDaSuperficie) {
+    public Estrela(String nome, long idade, String tipoDeAstro, double tamanho, double massa, double temperatura,
+            String forma) {
         this.setNome(nome);
+        this.setIdade(idade);
+        this.setTipoDeAstro(tipoDeAstro);
         this.setTamanho(tamanho);
         this.setMassa(massa);
-        this.setLuminosidade(luminosidade);
-        this.setTemperaturaDaSuperficie(temperaturaDaSuperficie);
+        this.setTemperatura(temperatura);
+        this.setForma(forma);
+        this.setQuantidadeDePlanetasEmOrbita(0);
         this.planetas = new ArrayList<>();
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public double getTamanho() {
-        return tamanho;
-    }
-
-    public void setTamanho(double tamanho) {
-        this.tamanho = tamanho;
-    }
-
-    public double getRaio() {
-        return raio;
-    }
-
-    public double getMassa() {
-        return massa;
-    }
-
-    public double getLuminosidade() {
-        return luminosidade;
-    }
-
-    public double getTemperaturaDaSuperficie() {
-        return temperaturaDaSuperficie;
+    public void adicionarPlanetaNaEstrela(Planeta planeta) {
+        this.planetas.add(planeta);
+        this.setQuantidadeDePlanetasEmOrbita(this.getQuantidadeDePlanetasEmOrbita() + 1);
     }
 
     public int getQuantidadeDePlanetasEmOrbita() {
@@ -70,33 +44,8 @@ public class Estrela implements Astros {
         this.planetas = planetas;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setRaio(double raio) {
-        this.raio = raio;
-    }
-
-    public void setMassa(double massa) {
-        this.massa = massa;
-    }
-
-    public void setLuminosidade(double luminosidade) {
-        this.luminosidade = luminosidade;
-    }
-
-    public void setTemperaturaDaSuperficie(double temperaturaDaSuperficie) {
-        this.temperaturaDaSuperficie = temperaturaDaSuperficie;
-    }
-
     public void setQuantidadeDePlanetasEmOrbita(int quantidadeDePlanetasEmOrbita) {
         this.quantidadeDePlanetasEmOrbita = quantidadeDePlanetasEmOrbita;
-    }
-
-    public void adicionarPlanetaNaEstrela(Planeta planeta) {
-        this.planetas.add(planeta);
-        this.setQuantidadeDePlanetasEmOrbita(this.getQuantidadeDePlanetasEmOrbita() + 1);
     }
 
     public SistemaEstelar getMeuSistema() {
@@ -116,13 +65,8 @@ public class Estrela implements Astros {
 
     @Override
     public void dados() {
-        System.out.println("----------DETALHES DA ESTRELA----------");
-        System.out.println("Nome da estrela: " + this.getNome());
-        System.out.println("Tamanho da estrela: " + formatoDeNumeros.format(this.getTamanho()) + " Km.");
-        System.out.println("Massa da estrela: " + formatoDeNumerosCientifico.format(this.getMassa()) + " Kg.");
-        System.out.println("Estrela com luminosidade de " + formatoDeNumeros.format(this.getLuminosidade()) + " W.");
-        System.out.println(
-                "Estrela com temperatura de " + formatoDeNumeros.format(this.getTemperaturaDaSuperficie()) + " K.");
+        System.out.println("---------- DETALHES DA ESTRELA ----------");
+       super.dados();
         if (this.getQuantidadeDePlanetasEmOrbita() == 1) {
             System.out.println(
                     "A estrela possui um planeta chamado: "

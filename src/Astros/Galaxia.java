@@ -7,7 +7,7 @@ import Astros.Interstellar.SistemaEstelar;
 
 public class Galaxia {
     private String nome;
-    private int idade;
+    private Long idade;
     private Estrela estrela;
     private Planeta planeta;
     private Lua lua;
@@ -15,8 +15,9 @@ public class Galaxia {
     private List<SistemaEstelar> sistemaEstelar;
 
     // Construtor
-    public Galaxia(String nome, SistemaEstelar sistemaEstelar) {
+    public Galaxia(String nome, Long idade, SistemaEstelar sistemaEstelar) {
         this.setNome(nome);
+        this.setIdade(idade);
         this.sistemaEstelarObjEstelar = sistemaEstelar;
         this.setSistemaEstelar(new ArrayList<>());
         if (sistemaEstelar.getMinhaGalaxia() == null) {
@@ -35,7 +36,7 @@ public class Galaxia {
             this.getSistemaEstelar().add(sistemaEstelar);
             sistemaEstelar.setMinhaGalaxia(this);
         } else {
-            System.out.println("Impossível vincular Galaxia " + this.nome + " no Sistema "
+            System.out.println("Impossível vincular Galaxia " + this.getNome() + " no Sistema "
                     + this.sistemaEstelarObjEstelar.getNome() + ".");
             System.out.println("Sistema " + this.sistemaEstelarObjEstelar.getNome() + " está vinculada a Galaxia "
                     + this.sistemaEstelarObjEstelar.getMinhaGalaxia().getNome() + ".");
@@ -101,6 +102,34 @@ public class Galaxia {
 
     public void setSistemaEstelar(List<SistemaEstelar> sistemaEstelar) {
         this.sistemaEstelar = sistemaEstelar;
+    }
+
+    public void setEstrela(Estrela estrela) {
+        this.estrela = estrela;
+    }
+
+    public void setPlaneta(Planeta planeta) {
+        this.planeta = planeta;
+    }
+
+    public void setLua(Lua lua) {
+        this.lua = lua;
+    }
+
+    public SistemaEstelar getSistemaEstelarObjEstelar() {
+        return sistemaEstelarObjEstelar;
+    }
+
+    public void setSistemaEstelarObjEstelar(SistemaEstelar sistemaEstelarObjEstelar) {
+        this.sistemaEstelarObjEstelar = sistemaEstelarObjEstelar;
+    }
+
+    public Long getIdade() {
+        return idade;
+    }
+
+    public void setIdade(long idade) {
+        this.idade = idade;
     }
 
 }

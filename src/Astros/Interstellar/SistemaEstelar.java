@@ -9,16 +9,17 @@ import Astros.Lua;
 import Astros.Planeta;
 
 public class SistemaEstelar {
-    private final String nome;
-    private int idade;
-    private final Estrela estrela;
-    private Lua lua;
-    private final List<Planeta> planetas;
-    private final List<Estrela> estrelas;
-    private Galaxia galaxia;
+    protected String nome;
+    protected long idade;
+    protected Estrela estrela;
+    protected Lua lua;
+    protected List<Planeta> planetas;
+    protected List<Estrela> estrelas;
+    protected Galaxia galaxia;
 
-    public SistemaEstelar(String nome, Estrela estrela) {
-        this.nome = nome;
+    public SistemaEstelar(String nome, long idade, Estrela estrela) {
+        this.setNome(nome);
+        this.setIdade(idade);
         this.estrela = estrela;
         this.planetas = new ArrayList<>();
         this.estrelas = new ArrayList<>();
@@ -37,8 +38,96 @@ public class SistemaEstelar {
         }
     }
 
+    public void exibirSistema() {
+        System.out.println("==== Sistema: " + this.nome + " ====");
+        if (this.estrelas.size() > 1) {
+            int i = 1;
+            for (Estrela estrela : estrelas) {
+                System.out.println(i + "---Estrela: " + estrela.getNome());
+                i++;
+            }
+        } else {
+            System.out.println("---Estrela: " + estrela.getNome());
+        }
+        if (this.getEstrela().getPlanetas().isEmpty()) {
+            System.out.println("Não possui planetas!");
+        } else {
+            System.out.println("----- Planetas -----");
+            int iPlan = 1;
+            for (Planeta p : this.getEstrela().getPlanetas()) {
+                System.out.println(iPlan + "--Planeta: " + p.getNome());
+                iPlan++;
+                if (p.isTemLuaEmOrbita()) {
+                    int i = 1;
+                    for (Lua lua : p.getLuas()) {
+                        System.out.println("   " + i + "-Lua de " + p.getNome() + ": " + lua.getNome());
+                        i++;
+
+                    }
+                }
+            }
+        }
+        System.out.println("========================================");
+    }
+
+    public void exibirSistemaComDados() {
+        System.out.println("==== Sistema: " + this.nome + " ====");
+        if (this.estrelas.size() > 1) {
+            int i = 1;
+            for (Estrela estrela : estrelas) {
+                System.out.println(i + "---Estrela: " + estrela.getNome());
+                estrela.dados();
+                i++;
+            }
+        } else {
+            System.out.println("---Estrela: " + estrela.getNome());
+            estrela.dados();
+        }
+        if (this.getEstrela().getPlanetas().isEmpty()) {
+            System.out.println("Não possui planetas!");
+        } else {
+            System.out.println("----- Planetas -----");
+            int iPlan = 1;
+            for (Planeta p : this.getEstrela().getPlanetas()) {
+                System.out.println(iPlan + "--Planeta: " + p.getNome());
+                p.dados(); // exibe os dados de cada planeta
+                iPlan++;
+                if (p.isTemLuaEmOrbita()) {
+                    int i = 1;
+                    for (Lua lua : p.getLuas()) {
+                        System.out.println("   " + i + "-Lua de " + p.getNome() + ": " + lua.getNome());
+                        lua.dados();
+                        i++;
+
+                    }
+                }
+            }
+        }
+        System.out.println("========================================");
+    }
+
     public String getNome() {
         return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setIdade(long idade) {
+        this.idade = idade;
+    }
+
+    public void setEstrela(Estrela estrela) {
+        this.estrela = estrela;
+    }
+
+    public void setPlanetas(List<Planeta> planetas) {
+        this.planetas = planetas;
+    }
+
+    public void setEstrelas(List<Estrela> estrelas) {
+        this.estrelas = estrelas;
     }
 
     public Estrela getEstrela() {
@@ -60,71 +149,36 @@ public class SistemaEstelar {
         }
     }
 
-    public void exibirSistema() {
-        System.out.println("==== Sistema: " + this.nome + " ====");
-        if (this.estrelas.size() > 1) {
-            int i = 1;
-            for (Estrela estrela : estrelas) {
-                System.out.println(i + "---Estrela: " + estrela.getNome());
-                i++;
-            }
-        } else {
-            System.out.println("---Estrela: " + estrela.getNome());
-        }
-        if (this.getEstrela().getPlanetas().isEmpty()) {
-            System.out.println("Não possui planetas!");
-        } else {
-            System.out.println("----- Planetas -----");
-            for (Planeta p : this.getEstrela().getPlanetas()) {
-                int iPlan = 1;
-                System.out.println(iPlan + "--Planeta: " + p.getNome());// exibe o nome de cada planeta
-                iPlan++;
-                if (p.isTemLuaEmOrbita()) {
-                    for (Lua lua : p.getLuas()) {
-                        int i = 1;
-                        System.out.println("   " + i + "-Lua de " + p.getNome() + ": " + lua.getNome());
-                        i++;
-
-                    }
-                }
-            }
-        }
-        System.out.println("========================================");
+    public long getIdade() {
+        return idade;
     }
 
-    public void exibirSistemaComDados() {
-        System.out.println("==== Sistema: " + this.nome + " ====");
-        if (this.estrelas.size() > 1) {
-            int i = 1;
-            for (Estrela estrela : estrelas) {
-                System.out.println(i + "---Estrela: " + estrela.getNome());
-                i++;
-                estrela.dados();
-            }
-        } else {
-            System.out.println("---Estrela: " + estrela.getNome());
-            estrela.dados();
-        }
-        if (this.getEstrela().getPlanetas().isEmpty()) {
-            System.out.println("Não possui planetas!");
-        } else {
-            System.out.println("----- Planetas -----");
-            for (Planeta p : this.getEstrela().getPlanetas()) {
-                int iPlan = 1;
-                System.out.println(iPlan + "--Planeta: " + p.getNome());
-                iPlan++;
-                p.dados(); // exibe os dados de cada planeta
-                if (p.isTemLuaEmOrbita()) {
-                    for (Lua lua : p.getLuas()) {
-                        int i = 1;
-                        System.out.println("   " + i + "-Lua de " + p.getNome() + ": " + lua.getNome());
-                        lua.dados();
-                        i++;
-
-                    }
-                }
-            }
-        }
-        System.out.println("========================================");
+    public void setIdade(int idade) {
+        this.idade = idade;
     }
+
+    public Lua getLua() {
+        return lua;
+    }
+
+    public void setLua(Lua lua) {
+        this.lua = lua;
+    }
+
+    public List<Planeta> getPlanetas() {
+        return planetas;
+    }
+
+    public List<Estrela> getEstrelas() {
+        return estrelas;
+    }
+
+    public Galaxia getGalaxia() {
+        return galaxia;
+    }
+
+    public void setGalaxia(Galaxia galaxia) {
+        this.galaxia = galaxia;
+    }
+
 }

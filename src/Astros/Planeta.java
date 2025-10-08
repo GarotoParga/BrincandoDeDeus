@@ -4,31 +4,35 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Planeta implements Astros {
-    private String nome; // Terra, Marte...
-    private int idade;
-    private double raio; // Em Km
-    private double tamanho; // Em Km
-    private double massa; // Em Kg
-    private String tipoDePlaneta; // Rochoso, Gasoso, Gelo, oceânico...
+public class Planeta extends Astro {
     private boolean temLuaEmOrbita; // Possui uma lua em sua orbita?
-    private int quantidadeDeLuasEmOrbita = 0;
+    private int quantidadeDeLuasEmOrbita;
     private List<Lua> luas;
-    private double distanciaDaEstrela; // Em Km
     private Estrela estrela;
 
     DecimalFormat formatoDeNumeros = new DecimalFormat("#,###.##");
     DecimalFormat formatoDeNumerosCientifico = new DecimalFormat("#,###.E0");
 
-    public Planeta(String nome, double tamanho, double massa, String tipoDePlaneta, Estrela estrela) {
+    public Planeta(String nome, long idade, String tipoDeAstro, double tamanho, double massa, double temperatura ,String forma,
+            Estrela estrela) {
         this.setNome(nome);
+        this.setIdade(idade);
+        this.setTipoDeAstro(tipoDeAstro);
         this.setTamanho(tamanho);
         this.setMassa(massa);
-        this.setTipoDePlaneta(tipoDePlaneta);
+        this.setTemperatura(temperatura);
+        this.setForma(forma);
         this.setEstrela(estrela);
+        this.setQuantidadeDeLuasEmOrbita(0);
         this.setTemLuaEmOrbita(false);
         estrela.adicionarPlanetaNaEstrela(this);
         this.luas = new ArrayList<>();
+    }
+
+    public void adicionarLua(Lua lua) {
+        luas.add(lua);
+        this.setQuantidadeDeLuasEmOrbita(this.getQuantidadeDeLuasEmOrbita() + 1);
+        this.setTemLuaEmOrbita(true);
     }
 
     public Estrela getEstrela() {
@@ -39,56 +43,12 @@ public class Planeta implements Astros {
         this.estrela = estrela;
     }
 
-    public double getTamanho() {
-        return tamanho;
-    }
-
-    public void setTamanho(double tamanho) {
-        this.tamanho = tamanho;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public double getRaio() {
-        return raio;
-    }
-
-    public double getMassa() {
-        return massa;
-    }
-
-    public String getTipoDePlaneta() {
-        return tipoDePlaneta;
-    }
-
     public boolean isTemLuaEmOrbita() {
         return temLuaEmOrbita;
     }
 
     public int getQuantidadeDeLuasEmOrbita() {
         return quantidadeDeLuasEmOrbita;
-    }
-
-    public double getDistanciaDaEstrela() {
-        return distanciaDaEstrela;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setRaio(double raio) {
-        this.raio = raio;
-    }
-
-    public void setMassa(double massa) {
-        this.massa = massa;
-    }
-
-    public void setTipoDePlaneta(String tipoDePlaneta) {
-        this.tipoDePlaneta = tipoDePlaneta;
     }
 
     public void setTemLuaEmOrbita(boolean temLuaEmOrbita) {
@@ -102,16 +62,6 @@ public class Planeta implements Astros {
         }
     }
 
-    public void setDistanciaDaEstrela(double distanciaDaEstrela) {
-        this.distanciaDaEstrela = distanciaDaEstrela;
-    }
-
-    public void adicionarLua(Lua lua) {
-        luas.add(lua);
-        this.setQuantidadeDeLuasEmOrbita(this.getQuantidadeDeLuasEmOrbita() + 1);
-        this.setTemLuaEmOrbita(true);
-    }
-
     public List<Lua> getLuas() {
         return luas;
     }
@@ -122,10 +72,8 @@ public class Planeta implements Astros {
 
     @Override
     public void dados() {
-        System.out.println("==========Planeta " + this.getNome() + "==========");
-        System.out.println("Tamanho do planeta: " + formatoDeNumeros.format(this.getTamanho()) + " Km.");
-        System.out.println("Massa do planeta: " + formatoDeNumerosCientifico.format(this.getMassa()) + " Kg.");
-        System.out.println("Planeta do tipo: " + this.getTipoDePlaneta());
+        System.out.println("---------- DETALHES DO PLANETA ----------");
+        super.dados();
         if (this.isTemLuaEmOrbita()) {
             if (this.getQuantidadeDeLuasEmOrbita() == 1) {
                 System.out.println(
@@ -141,20 +89,7 @@ public class Planeta implements Astros {
         }
         System.out.println("O planeta está orbitando a estrela: " + this.getEstrela().getNome());
         System.out.println("----------------------------------------");
-    }
 
-    public void compararTamanho(Planeta planeta) {
-        if (this.getRaio() > planeta.getRaio()) {
-            System.out.println("O planeta " + this.getNome() + " é maior que o planeta " + planeta.getNome());
-            System.out.println(
-                    "Possuindo um tamanho de " + this.getRaio() + " Km." + " Enquanto o planeta " + planeta.getNome()
-                            + " possui um tamamho de " + planeta.getRaio() + " km.");
-        } else {
-            System.out.println("O planeta " + this.getNome() + " é menor que o planeta " + planeta.getNome());
-            System.out.println("Enquanto o planeta " + this.getNome() + " possui um tamanho de " + this.getRaio()
-                    + " Km." + " O planeta " + planeta.getNome()
-                    + " possui um tamamho de " + planeta.getRaio() + " km.");
-        }
     }
 
 }
